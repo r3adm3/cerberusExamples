@@ -4,6 +4,7 @@ from cerberus import Validator
 import yaml
 
 v = Validator()
+
 v.schema = {'cities': {'type': 'list', 'schema': {'type': 'string'}}}
 
 with open('cities.yaml') as f:
