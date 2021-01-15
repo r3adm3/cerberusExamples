@@ -1,0 +1,23 @@
+version:
+  type: string
+services:
+  type: dict
+  schema:
+    addsvc:
+      type: dict
+      nullable: true
+    frontend:
+      type: dict
+      schema:
+        build:
+          type: string
+        ports:
+          allowed: ['18081:80']
+        environment:
+          allowed: ['ASPNETCORE_ENVIRONMENT=Development']    
+    minussvc:
+      type: dict
+      nullable: true
+    multiplysvc:
+      type: dict
+      nullable: true
