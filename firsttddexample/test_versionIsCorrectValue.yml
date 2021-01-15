@@ -1,0 +1,5 @@
+version:
+  type: string
+  allowed: ['3']
+services:
+  nullable: true
