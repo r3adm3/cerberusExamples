@@ -1,1 +1,0 @@
-{"services": {"addsvc":{"build":{"type": "string", "allowed": ["./addService"]}}}}
