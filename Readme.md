@@ -2,7 +2,8 @@
 
 To make use of these examples, ensure the cerberus PyPI module is installed
 
-'''python
+'''
+sudo apt-get install python3-pip
 pip3 install cerberus
 '''
 
