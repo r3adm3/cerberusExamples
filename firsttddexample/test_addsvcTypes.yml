@@ -5,16 +5,20 @@ services:
   schema:
     addsvc:
       type: dict
-      nullable: true
-    frontend:
-      type: dict
       schema:
         build:
           type: string
         ports:
-          allowed: ['18080:80']
+          type: list
+          schema: 
+            type: string
         environment:
-          allowed: ['ASPNETCORE_ENVIRONMENT=Development']    
+          type: list
+          schema: 
+            type: string
+    frontend:
+      type: dict
+      nullable: true
     minussvc:
       type: dict
       nullable: true
