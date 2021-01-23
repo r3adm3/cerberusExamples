@@ -1,0 +1,15 @@
+apiVersion:
+  type: string
+  allowed: ['apps/v1']
+services:
+  type: dict
+  nullable: true
+kind:
+  type: string
+  nullable: true
+metadata:
+  type: dict
+  nullable: true
+spec: 
+  type: dict
+  nullable: true

@@ -1,0 +1,151 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myservice-fe
+  labels:
+    app: myservice-fe
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myservice-fe
+  template:
+    metadata:
+      labels:
+        app: myservice-fe
+    spec:
+      containers:
+      - image: daed.duckdns.org:50000/multiservice_frontend:7bd5d07a843f320b54a83c0e87d230e9c9d2bfd4_799
+        name: multiservice-fe
+        ports:
+        - containerPort: 80
+        env: 
+          - name: KUBEENV
+            value: "true"
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myservice-as
+  labels:
+    app: myservice-as
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myservice-as
+  template:
+    metadata:
+      labels:
+        app: myservice-as
+    spec:
+      containers:
+      - image: daed.duckdns.org:50000/multiservice_addsvc:354267122a9c3dc0358af602ae2c07efcf8ae986_777
+        name: multiservice-as
+        ports:
+        - containerPort: 81
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myservice-mxs
+  labels:
+    app: myservice-mxs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myservice-mxs
+  template:
+    metadata:
+      labels:
+        app: myservice-mxs
+    spec:
+      containers:
+      - image: daed.duckdns.org:50000/multiservice_multiplysvc:354267122a9c3dc0358af602ae2c07efcf8ae986_778
+        name: multiservice-mxs
+        ports:
+        - containerPort: 82
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myservice-mis
+  labels:
+    app: myservice-mis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myservice-mis
+  template:
+    metadata:
+      labels:
+        app: myservice-mis
+    spec:
+      containers:
+      - image: daed.duckdns.org:50000/multiservice_minussvc:354267122a9c3dc0358af602ae2c07efcf8ae986_780
+        name: multiservice-mis
+        ports:
+        - containerPort: 83
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myservice-fe
+  name: myservice-fe
+spec:
+  ports:
+  - nodePort: 30500
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: myservice-fe
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myservice-as
+  name: myservice-as
+spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector: 
+      app: myservice-as
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: myservice-mxs
+    name: myservice-mxs
+  spec:
+      ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 80
+      selector: 
+        app: myservice-mxs
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: myservice-mis
+    name: myservice-mis
+  spec:
+      ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 80
+      selector: 
+        app: myservice-mis
