@@ -1,0 +1,20 @@
+apiVersion:
+  type: string
+  nullable: true
+kind:
+  type: string
+  nullable: true
+metadata:
+  type: dict
+  schema:
+    name: 
+      type: string
+      allowed: ['myservice-fe']
+    labels:
+      schema:
+        app: 
+          type: string 
+          allowed: ['myservice-fe']    
+spec: 
+  type: dict
+  nullable: true

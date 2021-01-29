@@ -1,0 +1,12 @@
+apiVersion:
+  type: string
+  nullable: true
+kind:
+  type: string
+  allowed: ['Deployment']
+metadata:
+  type: dict
+  nullable: true
+spec: 
+  type: dict
+  nullable: true
