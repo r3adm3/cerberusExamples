@@ -1,5 +1,6 @@
 import os
 import yaml
+import json
 from typing import Dict
 from cerberus import Validator, validator
 
@@ -24,14 +25,14 @@ with open ('multiservice.k8s-deployment.latest.yaml', 'r') as file:
     data = yaml.load_all(file, Loader=yaml.FullLoader)
 
     for d in data:
-        print ("-----")
-        strFolder = d["kind"] + "_" + d["metadata"]["name"] 
-        print (strFolder)
 
+        strFolder = d["kind"] + "_" + d["metadata"]["name"] 
+        print ("-- " + strFolder + " --")
+        print ()
         files = [f for f in os.listdir(strFolder) ]
         for f in files:
             if "test_" in f:
-                print(" + " + f)
+                #print(" + " + f)
 
                 strTestFileName = f
 
@@ -49,7 +50,7 @@ with open ('multiservice.k8s-deployment.latest.yaml', 'r') as file:
                         print('\n  *********************************************************')
                         print("   Error Details: " + json.dumps(v.errors))
                         print('  *********************************************************\n')
-
+        print()
  
 
 #with open('multiservice.k8s-deployment.latest.yaml') as f:

@@ -1,0 +1,39 @@
+apiVersion:
+  type: string
+  nullable: true
+kind:
+  type: string
+  nullable: true
+metadata:
+  type: dict
+  nullable: true   
+spec: 
+  type: dict
+  schema: 
+    replicas: 
+      type: integer
+      allowed: [2]
+    selector:
+      type: dict
+      schema:
+        matchLabels:
+          type: dict
+          schema:
+            app:
+              type: string
+              allowed: ['myservice-fe']
+    template:
+      type: dict
+      schema:
+        metadata:
+          type: dict
+          schema: 
+            labels:
+              type: dict
+              schema:
+                app: 
+                  type: string
+                  allowed: ['myservice-fe']
+        spec:
+          type: dict
+          nullable: true
